@@ -94,7 +94,9 @@ C:\jobjob\
 2. **재료 수집.** `profile\experiences.md`, `resume.md`를 읽고 문항별 경험 후보를 고른다. `knowledge\companies\<회사>.md`가 있으면 인재상·직무 요건 반영.
 3. **부족분 인터뷰.** 맞는 경험이 없거나 결과 수치가 빠진 부분만 묻는다. 한 번에 한 문항, 3~4개 질문 이내. 새로 나온 경험은 `experiences.md`에 추가.
 4. **초안 작성.** `principles.md` 원칙과 `question-patterns.md` 접근법을 따른다. 샘플은 문체 참고만, 경험·문장은 가져오지 않는다. `draft-vN.md`로 저장.
-5. **검증과 보고.** 자동 검증 후 문항별 글자 수·사용 경험 표를 보여준다. 수정은 다음 버전으로. "최종" 시 `final.md`, Word 요청 시 docx 스킬로 `final.docx`.
+5. **검증과 보고.** 자동 검증 후 문항별 글자 수·사용 경험 표를 보여준다. 수정은 다음 버전으로. "최종" 시 `final.md`, Word 요청 시 `scripts/md_to_docx.py`로 `final.docx`.
+
+> 변경 기록 (2026-09-05 구현 중): Word 생성은 원래 anthropic-skills:docx 스킬에 맡기려 했으나, 그 스킬은 Node.js가 필요하고 이 PC에 없어 실패했다. 대신 python-docx 기반 변환 스크립트를 스킬에 동봉했다. 결과물은 동일하고 의존성은 `pip install python-docx` 하나다.
 
 ### 자동 검증
 - **글자 수**: 공백 포함/제외 둘 다 표시. 제한 초과 또는 85% 미만이면 경고. `scripts\count_chars.py`로 수행.
@@ -121,5 +123,5 @@ C:\jobjob\
 ## 6. 의존성
 
 - Claude Code 스킬 시스템 (`.claude\skills\`)
-- Python (글자 수 스크립트)
-- 기존 `anthropic-skills:docx` 스킬 (Word 출력 시)
+- Python 3.12 (글자 수 스크립트, Word 변환 스크립트)
+- python-docx 패키지 (Word 출력 시. `python -m pip install python-docx`)
